@@ -14,6 +14,15 @@ static void (*from_matrix_fill_set_vector_matrix) (Matrix*, int, ...) = fill_set
 
 struct NeuralLayer;
 
+void set_null_neural_net(NeuralLayer *neural_net, int layers){
+    NeuralLayer *ap;
+
+    for(int i = 0; i < layers; i++){
+        ap = neural_net + i;
+        ap -> weights = NULL;
+    }
+}
+
 void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix input){
     NeuralLayer *ap;
 
@@ -54,6 +63,29 @@ void show_neural_net(NeuralLayer *neural_net, int layers){
     }
 }
 
+void free_neural_net(NeuralLayer *neural_net, int layers){
+    NeuralLayer *ap;
+
+    for(int i = 0; i < layers; i++){
+        ap = neural_net + i;
+        if(ap -> weights != NULL){
+            from_matrix_free_matrix(ap -> weights);
+        }
+
+        if(ap -> bias != NULL){
+            from_matrix_free_matrix(ap -> bias);
+        }
+
+        if(ap -> deltas != NULL){
+            from_matrix_free_matrix(ap -> deltas);
+        }
+
+        if(ap -> output != NULL){
+            from_matrix_free_matrix(ap -> output);
+        }
+    }
+}
+
 int main(){
     srand(time(NULL));
 
@@ -73,7 +105,6 @@ int main(){
         0.0, 1.0,
         1.0, 1.0
     );
-    //from_matrix_show_matrix(input);
 
     NeuralLayer *neural_net = (NeuralLayer*) malloc(layers * sizeof(NeuralLayer));
     create_neural_net(neural_net, arq_nn, layers, input);

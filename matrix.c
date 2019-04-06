@@ -169,6 +169,8 @@ void fill_set_vector_matrix(Matrix *matrix, int cant_cas, ...){
     matrix -> fill = true;
 }
 
+//bool is_null_matrix(Matrix)
+
 /*int main(){
     Matrix prueba = create_matriz(2, 3);
 
