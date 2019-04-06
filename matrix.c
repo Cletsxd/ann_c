@@ -34,6 +34,11 @@ Matrix create_matrix(int rows, int columns){
     return m;
 }
 
+Matrix create_null_matrix(){
+    Matrix m = {NULL, NULL, NULL, NULL};
+    return m;
+}
+
 void test_fill_matrix(Matrix *matrix){
     if(matrix -> vector == NULL || matrix -> r == NULL || matrix -> c == NULL){
         from_error_code_error_code(2);

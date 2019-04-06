@@ -4,6 +4,7 @@
 struct Matrix;
 
 Matrix create_matrix(int rows, int columns);
+Matrix create_null_matrix();
 void test_fill_matrix(Matrix *matrix);
 void fill_matrix(Matrix *matrix);
 void show_matrix(Matrix matrix);

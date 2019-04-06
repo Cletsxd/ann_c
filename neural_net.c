@@ -7,6 +7,7 @@
 #include "neural_layer_struct.h"
 
 static Matrix (*from_matrix_create_matrix) (int, int) = create_matrix;
+static Matrix (*from_matrix_create_null_matrix) (void) = create_null_matrix;
 static void (*from_matrix_fill_matrix) (Matrix*) = fill_matrix;
 static void (*from_matrix_show_matrix) (Matrix) = show_matrix;
 static void (*from_matrix_free_matrix) (Matrix*) = free_matrix;
@@ -20,21 +21,20 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
 
     ap = (neural_net + 0);
     ap -> output = input;
+    ap -> weights = from_matrix_create_null_matrix();
+    ap -> bias = from_matrix_create_null_matrix();
+    ap -> deltas = from_matrix_create_null_matrix();
 
     for(int i = 1; i < layers; i++){
         ap = (neural_net + i);
 
         ap -> weights = from_matrix_create_matrix(*(arq_nn + (i - 1)), *(arq_nn + i));
         ap -> bias = from_matrix_create_matrix(1, *(arq_nn + i));
+        ap -> output = from_matrix_create_null_matrix();
+        ap -> deltas = from_matrix_create_null_matrix();
 
         from_matrix_fill_matrix(&ap -> weights);
         from_matrix_fill_matrix(&ap -> bias);
-
-        //from_matrix_show_matrix(ap -> weights);
-        //from_matrix_show_matrix(ap -> bias);
-
-        /*from_matrix_free_matrix(&ap -> weights);
-        from_matrix_free_matrix(&ap -> bias);*/
     }
 }
 
@@ -60,23 +60,19 @@ void free_neural_net(NeuralLayer *neural_net, int layers){
 
     for(int i = 0; i < layers; i++){
         ap = neural_net + i;
-        /*if(from_matrix_is_null_matrix(&ap -> weights)){
-            printf("NOT NULL w\n");
+        if(!from_matrix_is_null_matrix(&ap -> weights)){
             from_matrix_free_matrix(&ap -> weights);
         }
 
-        if(from_matrix_is_null_matrix(&ap -> bias)){
-            printf("NOT NULL b\n");
+        if(!from_matrix_is_null_matrix(&ap -> bias)){
             from_matrix_free_matrix(&ap -> bias);
         }
 
-        if(from_matrix_is_null_matrix(&ap -> deltas)){
-            printf("NOT NULL d\n");
+        if(!from_matrix_is_null_matrix(&ap -> deltas)){
             from_matrix_free_matrix(&ap -> deltas);
-        }*/
+        }
 
         if(!from_matrix_is_null_matrix(&ap -> output)){
-            printf("NOT NULL o %i\n", i);
             from_matrix_free_matrix(&ap -> output);
         }
     }
