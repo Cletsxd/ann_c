@@ -169,7 +169,15 @@ void fill_set_vector_matrix(Matrix *matrix, int cant_cas, ...){
     matrix -> fill = true;
 }
 
-//bool is_null_matrix(Matrix)
+bool is_null_matrix(Matrix *matrix){
+    bool res = false;
+    if(matrix -> vector == NULL || matrix -> c == NULL || matrix -> r == NULL){
+        printf("yes is null\n");
+        res = true;
+    }
+
+    return res;
+}
 
 /*int main(){
     Matrix prueba = create_matriz(2, 3);

@@ -9,5 +9,6 @@ void fill_matrix(Matrix *matrix);
 void show_matrix(Matrix matrix);
 void free_matrix(Matrix *matrix);
 void fill_set_vector_matrix(Matrix *matrix, int cant_cas, ...);
+bool is_null_matrix(Matrix *matrix);
 
 #endif

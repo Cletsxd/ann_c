@@ -11,17 +11,9 @@ static void (*from_matrix_fill_matrix) (Matrix*) = fill_matrix;
 static void (*from_matrix_show_matrix) (Matrix) = show_matrix;
 static void (*from_matrix_free_matrix) (Matrix*) = free_matrix;
 static void (*from_matrix_fill_set_vector_matrix) (Matrix*, int, ...) = fill_set_vector_matrix;
+static bool (*from_matrix_is_null_matrix) (Matrix*) = is_null_matrix;
 
 struct NeuralLayer;
-
-void set_null_neural_net(NeuralLayer *neural_net, int layers){
-    NeuralLayer *ap;
-
-    for(int i = 0; i < layers; i++){
-        ap = neural_net + i;
-        ap -> weights = NULL;
-    }
-}
 
 void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix input){
     NeuralLayer *ap;
@@ -68,20 +60,24 @@ void free_neural_net(NeuralLayer *neural_net, int layers){
 
     for(int i = 0; i < layers; i++){
         ap = neural_net + i;
-        if(ap -> weights != NULL){
-            from_matrix_free_matrix(ap -> weights);
+        /*if(from_matrix_is_null_matrix(&ap -> weights)){
+            printf("NOT NULL w\n");
+            from_matrix_free_matrix(&ap -> weights);
         }
 
-        if(ap -> bias != NULL){
-            from_matrix_free_matrix(ap -> bias);
+        if(from_matrix_is_null_matrix(&ap -> bias)){
+            printf("NOT NULL b\n");
+            from_matrix_free_matrix(&ap -> bias);
         }
 
-        if(ap -> deltas != NULL){
-            from_matrix_free_matrix(ap -> deltas);
-        }
+        if(from_matrix_is_null_matrix(&ap -> deltas)){
+            printf("NOT NULL d\n");
+            from_matrix_free_matrix(&ap -> deltas);
+        }*/
 
-        if(ap -> output != NULL){
-            from_matrix_free_matrix(ap -> output);
+        if(!from_matrix_is_null_matrix(&ap -> output)){
+            printf("NOT NULL o %i\n", i);
+            from_matrix_free_matrix(&ap -> output);
         }
     }
 }
@@ -110,7 +106,7 @@ int main(){
     create_neural_net(neural_net, arq_nn, layers, input);
     show_neural_net(neural_net, layers);
 
+    free_neural_net(neural_net, layers);
     free((void*) arq_nn);
-    from_matrix_free_matrix(&input);
     free((void*) neural_net);
 }
