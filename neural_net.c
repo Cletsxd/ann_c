@@ -21,9 +21,6 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
     ap -> output = input;
 
     for(int i = 1; i < layers; i++){
-        //printf("Layer %i to layer %i, neurons: %i - neurons: %i\n", i+1, i+2, *(arq_nn + i), *(arq_nn + (i + 1)));
-        printf("Layer %i\n", i+1);
-        //printf("Layer %i to layer %i, neurons: %i - neurons: %i\n", i, i+1, *(arq_nn + (i - 1)), *(arq_nn + i));
         ap = (neural_net + i);
 
         ap -> weights = from_matrix_create_matrix(*(arq_nn + (i - 1)), *(arq_nn + i));
@@ -32,11 +29,28 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
         from_matrix_fill_matrix(&ap -> weights);
         from_matrix_fill_matrix(&ap -> bias);
 
-        from_matrix_show_matrix(ap -> weights);
-        from_matrix_show_matrix(ap -> bias);
+        //from_matrix_show_matrix(ap -> weights);
+        //from_matrix_show_matrix(ap -> bias);
 
-        from_matrix_free_matrix(&ap -> weights);
-        from_matrix_free_matrix(&ap -> bias);
+        /*from_matrix_free_matrix(&ap -> weights);
+        from_matrix_free_matrix(&ap -> bias);*/
+    }
+}
+
+void show_neural_net(NeuralLayer *neural_net, int layers){
+    printf("\n > Layer 1 (input layer): \n");
+    from_matrix_show_matrix(neural_net -> output);
+
+    NeuralLayer *ap;
+    ap = neural_net + 0;
+
+    for(int i = 1; i < layers; i++){
+        ap = neural_net + i;
+        printf("\n > Layer %i: \n", i);
+        printf(" - Weights\n");
+        from_matrix_show_matrix(ap -> weights);
+        printf(" - Bias\n");
+        from_matrix_show_matrix(ap -> bias);
     }
 }
 
@@ -63,7 +77,7 @@ int main(){
 
     NeuralLayer *neural_net = (NeuralLayer*) malloc(layers * sizeof(NeuralLayer));
     create_neural_net(neural_net, arq_nn, layers, input);
-    //show_neural_net(neural_net);
+    show_neural_net(neural_net, layers);
 
     free((void*) arq_nn);
     from_matrix_free_matrix(&input);
