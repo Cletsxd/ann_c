@@ -8,7 +8,7 @@
 #include "error_code.h"
 
 static void (*from_error_code_error_code) (int) = error_code;
-static void (*from_error_code_fuction_number) (int) = fuction_number;
+static void (*from_error_code_function_number) (int) = function_number;
 static void (*from_error_code_good_bye) (void) = good_bye;
 
 struct Matrix;
@@ -17,7 +17,7 @@ Matrix create_matrix(int rows, int columns){
     if(rows == 0 || columns == 0){
         from_error_code_error_code(1);
         printf(" Rows: %i - Columns: %i.", rows, columns);
-        from_error_code_fuction_number(1);
+        from_error_code_function_number(1);
         from_error_code_good_bye();
         exit(-1);
     }
@@ -40,9 +40,9 @@ Matrix create_null_matrix(){
 }
 
 void test_fill_matrix(Matrix *matrix){
-    if(matrix -> vector == NULL || matrix -> r == NULL || matrix -> c == NULL){
+    if(is_null_matrix(matrix)){
         from_error_code_error_code(2);
-        from_error_code_fuction_number(2);
+        from_error_code_function_number(2);
         from_error_code_good_bye();
         exit(-1);
     }
@@ -62,9 +62,9 @@ void test_fill_matrix(Matrix *matrix){
 }
 
 void fill_matrix(Matrix *matrix){
-    if(matrix -> vector == NULL || matrix -> r == NULL || matrix -> c == NULL){
+    if(is_null_matrix(matrix)){
         from_error_code_error_code(2);
-        from_error_code_fuction_number(3);
+        from_error_code_function_number(3);
         from_error_code_good_bye();
         exit(-1);
     }
@@ -82,16 +82,16 @@ void fill_matrix(Matrix *matrix){
 }
 
 void show_matrix(Matrix matrix){
-    if(matrix.vector == NULL || matrix.r == NULL || matrix.c == NULL || matrix.fill == NULL){
+    if(is_null_matrix(&matrix)){
         from_error_code_error_code(3);
-        from_error_code_fuction_number(4);
+        from_error_code_function_number(4);
         from_error_code_good_bye();
         exit(-1);
     }
 
     if(matrix.fill == false){
         from_error_code_error_code(4);
-        from_error_code_fuction_number(4);
+        from_error_code_function_number(4);
         from_error_code_good_bye();
         free_matrix(&matrix);
         exit(-1);
@@ -118,9 +118,9 @@ void show_matrix(Matrix matrix){
 }
 
 void free_matrix(Matrix *matrix){
-    if(matrix -> vector == NULL || matrix -> r == NULL || matrix -> c == NULL || matrix -> fill == NULL){
+    if(is_null_matrix(matrix)){
         from_error_code_error_code(5);
-        from_error_code_fuction_number(5);
+        from_error_code_function_number(5);
         from_error_code_good_bye();
         exit(-1);
     }
@@ -134,9 +134,9 @@ void free_matrix(Matrix *matrix){
 }
 
 void fill_set_vector_matrix(Matrix *matrix, int cant_cas, ...){
-    if(matrix -> vector == NULL || matrix -> r == NULL || matrix -> c == NULL){
+    if(is_null_matrix(matrix)){
         from_error_code_error_code(2);
-        from_error_code_fuction_number(6);
+        from_error_code_function_number(6);
         from_error_code_good_bye();
         exit(-1);
     }
@@ -177,7 +177,6 @@ void fill_set_vector_matrix(Matrix *matrix, int cant_cas, ...){
 bool is_null_matrix(Matrix *matrix){
     bool res = false;
     if(matrix -> vector == NULL || matrix -> c == NULL || matrix -> r == NULL){
-        printf("yes is null\n");
         res = true;
     }
 

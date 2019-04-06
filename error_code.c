@@ -22,10 +22,18 @@ void error_code(int e){
         case 5:
             printf("\n> ERROR 5: Matrix is already NULL.");
         break;
+
+        case 6:
+            printf("\n> ERROR 6: Can't create neural net because the arg `layers` is 0.");
+        break;
+
+        case 7:
+            printf("\n> ERROR 7: Neural net has no layers.");
+        break;
     }
 }
 
-void fuction_number(int f){
+void function_number(int f){
     switch(f){
         case 1:
             printf(" Function: create_matrix().\n");
@@ -49,6 +57,18 @@ void fuction_number(int f){
 
         case 6:
             printf(" Function: fill_set_vector_matrix().\n");
+        break;
+
+        case 7:
+            printf(" Function: create_neural_net().\n");
+        break;
+
+        case 8:
+            printf(" Function: show_neural_net().\n");
+        break;
+
+        case 9:
+            printf(" Function: free_neural_net().\n");
         break;
     }
 }
