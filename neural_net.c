@@ -75,6 +75,7 @@ void show_neural_net(NeuralLayer *neural_net, int layers){
     }
 }
 
+// Elimina la red
 void free_neural_net(NeuralLayer *neural_net, int *layers){
     if(*layers == 0){
         from_error_code_error_code(7);
