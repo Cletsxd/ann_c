@@ -6,6 +6,7 @@
 #include "matrix.h"
 #include "neural_layer_struct.h"
 #include "error_code.h"
+#include "neural_net.h"
 
 static Matrix (*from_matrix_create_matrix) (int, int) = create_matrix;
 static Matrix (*from_matrix_create_null_matrix) (void) = create_null_matrix;
@@ -66,7 +67,7 @@ void show_neural_net(NeuralLayer *neural_net, int layers){
 
     for(int i = 1; i < layers; i++){
         ap = neural_net + i;
-        printf("\n > Layer %i: \n", i);
+        printf("\n > Layer %i: \n", i + 1);
         printf(" - Weights\n");
         from_matrix_show_matrix(ap -> weights);
         printf(" - Bias\n");
@@ -131,9 +132,6 @@ int main(){
     show_neural_net(neural_net, layers);
 
     free_neural_net(neural_net, &layers);
-    
-    show_neural_net(neural_net, layers);
-
     free((void*) arq_nn);
     free((void*) neural_net);
 }
