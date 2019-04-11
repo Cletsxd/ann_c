@@ -30,6 +30,10 @@ void error_code(int e){
         case 7:
             printf("\n> ERROR 7: Neural net has no layers.");
         break;
+
+        case 8:
+            printf("\n> ERROR 8: The operation can't resolve. The arguments are incorrect.");
+        break;
     }
 }
 
@@ -69,6 +73,14 @@ void function_number(int f){
 
         case 9:
             printf(" Function: free_neural_net().\n");
+        break;
+
+        case 10:
+            printf(" Function: fill_zeros_matrix().\n");
+        break;
+
+        case 11:
+            printf(" Function: dot_function().\n");
         break;
     }
 }

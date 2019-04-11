@@ -108,7 +108,7 @@ void free_neural_net(NeuralLayer *neural_net, int *layers){
     *layers = 0;
 }
 
-int main(){
+/*int main(){
     srand(time(NULL));
 
     int layers = 3;
@@ -135,4 +135,4 @@ int main(){
     free_neural_net(neural_net, &layers);
     free((void*) arq_nn);
     free((void*) neural_net);
-}
+}*/

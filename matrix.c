@@ -183,6 +183,26 @@ bool is_null_matrix(Matrix *matrix){
     return res;
 }
 
+void fill_zeros_matrix(Matrix *matrix){
+    if(is_null_matrix(matrix)){
+        from_error_code_error_code(2);
+        from_error_code_function_number(10);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    float *pa;
+
+    for(int i = 0; i < matrix -> r; i++){
+        pa = *(matrix -> vector + i);
+        for(int j = 0; j < matrix -> c; j++){
+            *(pa + j) = 0.0;
+        }
+    }
+
+    matrix -> fill = true;
+}
+
 /*int main(){
     Matrix prueba = create_matriz(2, 3);
 
