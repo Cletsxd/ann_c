@@ -42,6 +42,10 @@ void error_code(int e){
         case 10:
             printf("\n> ERROR 10: The operation can't resolve. The columns of matrix `a` and `b` are not equal.");
         break;
+
+        case 11:
+            printf("\n> ERROR 11: The operation can't resolve. The rows of matrix `a` and `b` are not equal.");
+        break;
     }
 }
 
@@ -93,6 +97,10 @@ void function_number(int f){
 
         case 12:
             printf(" Function: suma_wc_function().\n");
+        break;
+
+        case 13:
+            printf(" Function: subs_matrix_function().\n");
         break;
     }
 }

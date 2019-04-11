@@ -89,6 +89,41 @@ Matrix sum_wc_fuction(Matrix a, Matrix b){
     return res;
 }
 
+Matrix subs_matrix_function(Matrix a, Matrix b){
+    if(a.r != b.r){
+        from_error_code_error_code(11);
+        from_error_code_function_number(13);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(a.c != b.c){
+        from_error_code_error_code(10);
+        from_error_code_function_number(13);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    Matrix res = from_matrix_create_matrix(a.r, b.c);
+    from_matrix_fill_zeros_matrix(&res);
+
+    float *res_aux;
+    float *a_aux;
+    float *b_aux;
+
+    for(int i = 0; i < a.r; i++){
+        res_aux = *(res.vector + i);
+        a_aux = *(a.vector + i);
+        b_aux = *(b.vector + i);
+
+        for(int j = 0; j < a.c; j++){
+            *(res_aux + j) = *(a_aux + j) - *(b_aux + j);
+        }
+    }
+
+    return res;
+}
+
 int main(){
     /*Matrix a = create_matrix(2, 3);
     from_matrix_fill_set_vector_matrix(
@@ -114,14 +149,14 @@ int main(){
     from_matrix_free_matrix(&b);
     from_matrix_free_matrix(&res);*/
 
-    Matrix b = create_matrix(1, 3);
+    /*Matrix b = create_matrix(1, 3);
     from_matrix_fill_set_vector_matrix(
         &b,
         b.c * b.r,
         1.0, 0.0, 1.0
     );
 
-    Matrix a = create_matrix(3, 4);
+    Matrix a = create_matrix(3, 3);
     from_matrix_fill_set_vector_matrix(
         &a,
         a.c * a.r,
@@ -135,5 +170,30 @@ int main(){
 
     from_matrix_free_matrix(&a);
     from_matrix_free_matrix(&b);
-    from_matrix_free_matrix(&res);
+    from_matrix_free_matrix(&res);*/
+
+    /*Matrix a = create_matrix(3, 3);
+    from_matrix_fill_set_vector_matrix(
+        &a,
+        a.c * a.r,
+        3.0, 5.0, 4.0,
+        1.0, 6.0, 7.0,
+        1.0, 0.0, 1.0
+    );
+
+    Matrix b = create_matrix(3, 3);
+    from_matrix_fill_set_vector_matrix(
+        &b,
+        b.c * b.r,
+        1.0, 7.0, 3.0,
+        3.0, 2.0, 8.0,
+        4.0, 3.0, 9.0
+    );
+
+    Matrix res = subs_matrix_function(a, b);
+    from_matrix_show_matrix(res);
+
+    from_matrix_free_matrix(&a);
+    from_matrix_free_matrix(&b);
+    from_matrix_free_matrix(&res);*/
 }
