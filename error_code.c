@@ -118,6 +118,10 @@ void function_number(int f){
         case 16:
             printf(" Function: mean_matrix_function().\n");
         break;
+
+        case 17:
+            printf(" Function: mult_matrix_float_function().\n");
+        break;
     }
 }
 

@@ -288,6 +288,34 @@ Matrix mean_matrix_function(Matrix mat){
 
     return res;
 }
+
+Matrix mult_matrix_float_function(Matrix mat, float num){
+    if(mat.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `mat`.");
+        from_error_code_function_number(17);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    Matrix res = create_matrix(mat.r, mat.c);
+    from_matrix_fill_zeros_matrix(&res);
+
+    float *res_aux;
+    float *mat_aux;
+
+    for(int i = 0; i < mat.r; i++){
+        res_aux = *(res.vector + i);
+        mat_aux = *(mat.vector + i);
+
+        for(int j = 0; j < mat.c; j++){
+            *(res_aux + j) = *(mat_aux + j) * num;
+        }
+    }
+
+    return res;
+}
+
 int main(){
     /*Matrix a = create_matrix(2, 3);
     from_matrix_fill_set_vector_matrix(
@@ -410,4 +438,19 @@ int main(){
     from_matrix_free_matrix(&a);
     from_matrix_free_matrix(&b);
     from_matrix_free_matrix(&res);*/
+
+    Matrix a = create_matrix(3, 3);
+    from_matrix_fill_set_vector_matrix(
+        &a,
+        a.c * a.r,
+        3.0, 5.0, 4.0,
+        1.0, 6.0, 7.0,
+        1.0, 0.0, 1.0
+    );
+
+    Matrix res = mult_matrix_float_function(a, 2.1);
+    from_matrix_show_matrix(res);
+
+    from_matrix_free_matrix(&a);
+    from_matrix_free_matrix(&res);
 }
