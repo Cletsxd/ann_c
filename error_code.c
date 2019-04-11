@@ -102,6 +102,14 @@ void function_number(int f){
         case 13:
             printf(" Function: subs_matrix_function().\n");
         break;
+
+        case 14:
+            printf(" Function: deriv_e2medio_function().\n");
+        break;
+
+        case 15:
+            printf(" Function: mult_matrix_function().\n");
+        break;
     }
 }
 
