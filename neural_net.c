@@ -37,6 +37,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
     ap -> weights = from_matrix_create_null_matrix();
     ap -> bias = from_matrix_create_null_matrix();
     ap -> deltas = from_matrix_create_null_matrix();
+    ap -> function = NeuralLayer::Sigmoidal;
 
     for(int i = 1; i < layers; i++){
         ap = (neural_net + i);
@@ -45,6 +46,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
         ap -> bias = from_matrix_create_matrix(1, *(arq_nn + i));
         ap -> output = from_matrix_create_null_matrix();
         ap -> deltas = from_matrix_create_null_matrix();
+        ap -> function = NeuralLayer::Tanh;
 
         from_matrix_fill_matrix(&ap -> weights);
         from_matrix_fill_matrix(&ap -> bias);
@@ -72,6 +74,14 @@ void show_neural_net(NeuralLayer *neural_net, int layers){
         from_matrix_show_matrix(ap -> weights);
         printf(" - Bias\n");
         from_matrix_show_matrix(ap -> bias);
+        
+        /*switch(ap -> function){
+            case NeuralLayer::Sigmoidal: printf("Sigmoidal\n");
+            break;
+
+            case NeuralLayer::Tanh: printf("Tanh\n");
+            break;
+        }*/
     }
 }
 
@@ -108,7 +118,7 @@ void free_neural_net(NeuralLayer *neural_net, int *layers){
     *layers = 0;
 }
 
-/*int main(){
+int main(){
     srand(time(NULL));
 
     int layers = 3;
@@ -135,4 +145,4 @@ void free_neural_net(NeuralLayer *neural_net, int *layers){
     free_neural_net(neural_net, &layers);
     free((void*) arq_nn);
     free((void*) neural_net);
-}*/
+}

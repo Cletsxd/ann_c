@@ -316,7 +316,7 @@ Matrix mult_matrix_float_function(Matrix mat, float num){
     return res;
 }
 
-int main(){
+//int main(){
     /*Matrix a = create_matrix(2, 3);
     from_matrix_fill_set_vector_matrix(
         &a,
@@ -439,7 +439,7 @@ int main(){
     from_matrix_free_matrix(&b);
     from_matrix_free_matrix(&res);*/
 
-    Matrix a = create_matrix(3, 3);
+    /*Matrix a = create_matrix(3, 3);
     from_matrix_fill_set_vector_matrix(
         &a,
         a.c * a.r,
@@ -452,5 +452,5 @@ int main(){
     from_matrix_show_matrix(res);
 
     from_matrix_free_matrix(&a);
-    from_matrix_free_matrix(&res);
-}
+    from_matrix_free_matrix(&res);*/
+//}
