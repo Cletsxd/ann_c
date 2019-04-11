@@ -34,6 +34,14 @@ void error_code(int e){
         case 8:
             printf("\n> ERROR 8: The operation can't resolve. The arguments are incorrect.");
         break;
+
+        case 9:
+            printf("\n> ERROR 9: The operation can't resolve. The `b` matrix has a value of rows > 1.");
+        break;
+
+        case 10:
+            printf("\n> ERROR 10: The operation can't resolve. The columns of matrix `a` and `b` are not equal.");
+        break;
     }
 }
 
@@ -81,6 +89,10 @@ void function_number(int f){
 
         case 11:
             printf(" Function: dot_function().\n");
+        break;
+
+        case 12:
+            printf(" Function: suma_wc_function().\n");
         break;
     }
 }
