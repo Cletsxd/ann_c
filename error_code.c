@@ -4,15 +4,15 @@
 void error_code(int e){
     switch(e){
         case 1:
-            printf("\n> ERROR 1: Can't create matrix with those dimensions.");
+            printf("\n> ERROR 1: Can't create Matrix with those dimensions.");
         break;
 
         case 2:
-            printf("\n> ERROR 2: Can't fill matrix because the argument `matrix` is not created or NULL.");
+            printf("\n> ERROR 2: Can't fill Matrix because the argument `matrix` is not created or NULL.");
         break;
 
         case 3:
-            printf("\n> ERROR 3: Can't show matrix because the argument `matrix` is not created or NULL.");
+            printf("\n> ERROR 3: Can't show Matrix because the argument `matrix` is not created or NULL.");
         break;
 
         case 4:
@@ -36,15 +36,19 @@ void error_code(int e){
         break;
 
         case 9:
-            printf("\n> ERROR 9: The operation can't resolve. The `b` matrix has a value of rows > 1.");
+            printf("\n> ERROR 9: The operation can't resolve. The `b` Matrix has a value of rows > 1.");
         break;
 
         case 10:
-            printf("\n> ERROR 10: The operation can't resolve. The columns of matrix `a` and `b` are not equal.");
+            printf("\n> ERROR 10: The operation can't resolve. The columns of Matrix `a` and `b` are not equal.");
         break;
 
         case 11:
-            printf("\n> ERROR 11: The operation can't resolve. The rows of matrix `a` and `b` are not equal.");
+            printf("\n> ERROR 11: The operation can't resolve. The rows of Matrix `a` and `b` are not equal.");
+        break;
+
+        case 12:
+            printf("\n> ERROR 12: The operation can't resolve. The Matrix is NULL or not filled.");
         break;
     }
 }
@@ -109,6 +113,10 @@ void function_number(int f){
 
         case 15:
             printf(" Function: mult_matrix_function().\n");
+        break;
+
+        case 16:
+            printf(" Function: mean_matrix_function().\n");
         break;
     }
 }

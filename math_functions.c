@@ -18,7 +18,23 @@ static void (*from_error_code_good_bye) (void) = good_bye;
 Matrix dot_fuction(Matrix a, Matrix b){
     if(a.c != b.r){
         from_error_code_error_code(8);
-        printf(" `a matrix` columns: %i - `b matrix` rows: %i", a.c, b.r);
+        printf(" `a Matrix` columns: %i - `b Matrix` rows: %i.", a.c, b.r);
+        from_error_code_function_number(11);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(a.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `a`.");
+        from_error_code_function_number(11);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(b.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `b`.");
         from_error_code_function_number(11);
         from_error_code_good_bye();
         exit(-1);
@@ -67,6 +83,22 @@ Matrix sum_wc_fuction(Matrix a, Matrix b){
         exit(-1);
     }
 
+    if(a.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `a`.");
+        from_error_code_function_number(12);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(b.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `b`.");
+        from_error_code_function_number(12);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
     Matrix res;
 
     res = from_matrix_create_matrix(a.r, a.c);
@@ -99,6 +131,22 @@ Matrix subs_matrix_function(Matrix a, Matrix b){
 
     if(a.c != b.c){
         from_error_code_error_code(10);
+        from_error_code_function_number(13);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(a.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `a`.");
+        from_error_code_function_number(13);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(b.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `b`.");
         from_error_code_function_number(13);
         from_error_code_good_bye();
         exit(-1);
@@ -139,6 +187,22 @@ Matrix deriv_e2medio_function(Matrix a, Matrix b){
         exit(-1);
     }
 
+    if(a.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `a`.");
+        from_error_code_function_number(14);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(b.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `b`.");
+        from_error_code_function_number(14);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
     return subs_matrix_function(a, b);
 }
 
@@ -152,6 +216,22 @@ Matrix mult_matrix_function(Matrix a, Matrix b){
 
     if(a.c != b.c){
         from_error_code_error_code(10);
+        from_error_code_function_number(15);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(a.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `a`.");
+        from_error_code_function_number(15);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    if(b.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `b`.");
         from_error_code_function_number(15);
         from_error_code_good_bye();
         exit(-1);
@@ -177,6 +257,37 @@ Matrix mult_matrix_function(Matrix a, Matrix b){
     return res;
 }
 
+Matrix mean_matrix_function(Matrix mat){
+    if(mat.fill == NULL){
+        from_error_code_error_code(12);
+        printf(" Matrix `mat`.");
+        from_error_code_function_number(16);
+        from_error_code_good_bye();
+        exit(-1);
+    }
+
+    Matrix res = from_matrix_create_matrix(1, mat.c);
+    from_matrix_fill_zeros_matrix(&res);
+
+    float *res_aux;
+    float *mat_aux;
+
+    res_aux = *(res.vector + 0);
+
+    for(int i = 0; i < mat.r; i++){
+        mat_aux = *(mat.vector + i);
+
+        for(int j = 0; j < mat.c; j++){
+            *(res_aux + j) = *(mat_aux + j) + *(res_aux + j);
+        }
+    }
+
+    for(int j = 0; j < mat.c; j++){
+        *(res_aux + j) = *(res_aux + j) / mat.r;
+    }
+
+    return res;
+}
 int main(){
     /*Matrix a = create_matrix(2, 3);
     from_matrix_fill_set_vector_matrix(
@@ -275,7 +386,7 @@ int main(){
     from_matrix_free_matrix(&b);
     from_matrix_free_matrix(&res);*/
 
-    Matrix a = create_matrix(3, 3);
+    /*Matrix a = create_matrix(3, 3);
     from_matrix_fill_set_vector_matrix(
         &a,
         a.c * a.r,
@@ -298,5 +409,5 @@ int main(){
 
     from_matrix_free_matrix(&a);
     from_matrix_free_matrix(&b);
-    from_matrix_free_matrix(&res);
+    from_matrix_free_matrix(&res);*/
 }
