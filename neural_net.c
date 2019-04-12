@@ -7,6 +7,7 @@
 #include "neural_layer_struct.h"
 #include "error_code.h"
 #include "neural_net.h"
+#include "math_functions.h"
 
 static Matrix (*from_matrix_create_matrix) (int, int) = create_matrix;
 static Matrix (*from_matrix_create_null_matrix) (void) = create_null_matrix;
@@ -15,6 +16,20 @@ static void (*from_matrix_show_matrix) (Matrix) = show_matrix;
 static void (*from_matrix_free_matrix) (Matrix*) = free_matrix;
 static void (*from_matrix_fill_set_vector_matrix) (Matrix*, int, ...) = fill_set_vector_matrix;
 static bool (*from_matrix_is_null_matrix) (Matrix*) = is_null_matrix;
+
+static Matrix (*from_math_functions_dot_function) (Matrix, Matrix) = dot_function;
+static Matrix (*from_math_functions_sum_wc_function) (Matrix, Matrix) = sum_wc_function;
+static Matrix (*from_math_functions_subs_matrix_function) (Matrix, Matrix) = subs_matrix_function;
+static Matrix (*from_math_functions_deriv_e2medio_function) (Matrix, Matrix) = deriv_e2medio_function;
+static Matrix (*from_math_functions_mult_matrix_function) (Matrix, Matrix) = mult_matrix_function;
+static Matrix (*from_math_functions_mean_matrix_function) (Matrix) = mean_matrix_function;
+static Matrix (*from_math_functions_mult_matrix_float_function) (Matrix, float) = mult_matrix_float_function;
+static Matrix (*from_math_functions_sigmoidal_act_function) (Matrix) = sigmoidal_act_function;
+static Matrix (*from_math_functions_tanh_act_function) (Matrix) = tanh_act_function;
+static Matrix (*from_math_functions_relu_act_function) (Matrix) = relu_act_function;
+static Matrix (*from_math_functions_sigmoidal_deriv_function) (Matrix) = sigmoidal_deriv_function;
+static Matrix (*from_math_functions_tanh_deriv_function) (Matrix) = tanh_deriv_function;
+static Matrix (*from_math_functions_relu_deriv_function) (Matrix) = relu_deriv_function;
 
 static void (*from_error_code_error_code) (int) = error_code;
 static void (*from_error_code_function_number) (int) = function_number;
@@ -118,6 +133,34 @@ void free_neural_net(NeuralLayer *neural_net, int *layers){
     *layers = 0;
 }
 
+void feed_forward(NeuralLayer *neural_net, int layers){
+    NeuralLayer *layer;
+    NeuralLayer *layer_p;
+
+    Matrix res;
+
+    for(int i = 0; i < layers - 1; i++){
+        /*printf(" DOT {output layer %i & weights layer %i}\n", i, i + 1);
+        printf(" SUMA_WC {DOT & bias layer %i}\n", i + 1);
+        printf(" ACTIVE_F {SUMA_WC}\n");
+        printf(" SEET_OUTPUT {layer %i}\n", i + 1);
+        printf("\n\n");*/
+        layer = neural_net + i;
+        layer_p = neural_net + i + 1;
+
+        res = from_math_functions_dot_function(layer -> output, layer_p -> weights);
+        res = from_math_functions_sum_wc_function(res, layer_p -> bias);
+
+        switch(layer_p -> function){
+            case NeuralLayer::Sigmoidal: res = from_math_functions_sigmoidal_act_function(res); break;
+            case NeuralLayer::Tanh: res = from_math_functions_tanh_act_function(res); break;
+            case NeuralLayer::Relu: res = from_math_functions_relu_act_function(res); break;
+        }
+
+        layer_p -> output = res;
+    }
+}
+
 int main(){
     srand(time(NULL));
 
@@ -141,6 +184,8 @@ int main(){
     NeuralLayer *neural_net = (NeuralLayer*) malloc(layers * sizeof(NeuralLayer));
     create_neural_net(neural_net, arq_nn, layers, input);
     show_neural_net(neural_net, layers);
+
+    feed_forward(neural_net, layers);
 
     free_neural_net(neural_net, &layers);
     free((void*) arq_nn);

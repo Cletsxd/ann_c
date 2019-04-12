@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "math_functions.h"
 #include "matrix_struct.h"
 #include "matrix.h"
 #include "error_code.h"
@@ -15,7 +16,7 @@ static void (*from_error_code_error_code) (int) = error_code;
 static void (*from_error_code_function_number) (int) = function_number;
 static void (*from_error_code_good_bye) (void) = good_bye;
 
-Matrix dot_fuction(Matrix a, Matrix b){
+Matrix dot_function(Matrix a, Matrix b){
     if(a.c != b.r){
         from_error_code_error_code(8);
         printf(" `a Matrix` columns: %i - `b Matrix` rows: %i.", a.c, b.r);
@@ -68,7 +69,7 @@ Matrix dot_fuction(Matrix a, Matrix b){
     return res;
 }
 
-Matrix sum_wc_fuction(Matrix a, Matrix b){
+Matrix sum_wc_function(Matrix a, Matrix b){
     if(b.r > 1){
         from_error_code_error_code(9);
         from_error_code_function_number(12);
@@ -316,6 +317,36 @@ Matrix mult_matrix_float_function(Matrix mat, float num){
     return res;
 }
 
+Matrix sigmoidal_act_function(Matrix mat){
+    printf("act sigm\n");
+    Matrix res;
+    return res;
+}
+
+Matrix tanh_act_function(Matrix mat){
+    printf("act tanh\n");
+    Matrix res;
+    return res;
+}
+
+Matrix relu_act_function(Matrix mat){
+    printf("act relu\n");
+    Matrix res;
+    return res;
+}
+
+Matrix sigmoidal_deriv_function(Matrix mat){
+    printf("act sigm\n");
+}
+
+Matrix tanh_deriv_function(Matrix mat){
+    printf("act sigm\n");
+}
+
+Matrix relu_deriv_function(Matrix mat){
+    printf("act sigm\n");
+}
+
 //int main(){
     /*Matrix a = create_matrix(2, 3);
     from_matrix_fill_set_vector_matrix(
@@ -334,7 +365,7 @@ Matrix mult_matrix_float_function(Matrix mat, float num){
         2.0, -1.0
     );
 
-    Matrix res = dot_fuction(a, b);
+    Matrix res = dot_function(a, b);
     from_matrix_show_matrix(res);
 
     from_matrix_free_matrix(&a);
@@ -357,7 +388,7 @@ Matrix mult_matrix_float_function(Matrix mat, float num){
         1.0, 0.0, 1.0
     );
 
-    Matrix res = sum_wc_fuction(a, b);
+    Matrix res = sum_wc_function(a, b);
     from_matrix_show_matrix(res);
 
     from_matrix_free_matrix(&a);
