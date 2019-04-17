@@ -318,7 +318,7 @@ Matrix mult_matrix_float_function(Matrix mat, float num){
     return res;
 }
 
-Matrix t_fuction(Matrix mat){
+Matrix t_function(Matrix mat){
     Matrix res;
     res = from_matrix_create_matrix(mat.c, mat.r);
     from_matrix_fill_zeros_matrix(&res);
@@ -541,7 +541,7 @@ Matrix relu_deriv_function(Matrix mat){
     from_matrix_free_matrix(&res);*/
 //}
 
-int main(){
+/*int main(){
     Matrix a = create_matrix(3, 3);
     from_matrix_fill_set_vector_matrix(
         &a,
@@ -556,4 +556,4 @@ int main(){
 
     from_matrix_free_matrix(&a);
     from_matrix_free_matrix(&res);
-}
+}*/
