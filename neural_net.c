@@ -133,7 +133,7 @@ void free_neural_net(NeuralLayer *neural_net, int *layers){
     *layers = 0;
 }
 
-void feed_forward(NeuralLayer *neural_net, int layers){
+void feed_forward_neural_net(NeuralLayer *neural_net, int layers){
     NeuralLayer *layer;
     NeuralLayer *layer_p;
 
@@ -162,6 +162,14 @@ void feed_forward(NeuralLayer *neural_net, int layers){
     }
 }
 
+void show_final_output_neural_net(NeuralLayer *neural_net, int layers){
+    NeuralLayer *layer;
+
+    layer = neural_net + (layers - 1);
+
+    from_matrix_show_matrix(layer -> output);
+}
+
 int main(){
     srand(time(NULL));
 
@@ -186,7 +194,10 @@ int main(){
     create_neural_net(neural_net, arq_nn, layers, input);
     show_neural_net(neural_net, layers);
 
-    feed_forward(neural_net, layers);
+    feed_forward_neural_net(neural_net, layers);
+
+    printf("\n Final Output\n");
+    show_final_output_neural_net(neural_net, layers);
 
     free_neural_net(neural_net, &layers);
     free((void*) arq_nn);

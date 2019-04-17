@@ -6,6 +6,6 @@ struct NeuralLayer;
 void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix input);
 void show_neural_net(NeuralLayer *neural_net, int layers);
 void free_neural_net(NeuralLayer *neural_net, int *layers);
-void feed_forward(NeuralLayer *neural_net, int layers);
+void feed_forward_neural_net(NeuralLayer *neural_net, int layers);
 
 #endif
