@@ -47,7 +47,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
 
     NeuralLayer *ap;
 
-    ap = (neural_net + 0);
+    ap = neural_net + 0;
     ap -> output = input;
     ap -> weights = from_matrix_create_null_matrix();
     ap -> bias = from_matrix_create_null_matrix();
@@ -55,7 +55,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
     ap -> function = NeuralLayer::Sigmoidal;
 
     for(int i = 1; i < layers; i++){
-        ap = (neural_net + i);
+        ap = neural_net + i;
 
         ap -> weights = from_matrix_create_matrix(*(arq_nn + (i - 1)), *(arq_nn + i));
         ap -> bias = from_matrix_create_matrix(1, *(arq_nn + i));
@@ -89,14 +89,6 @@ void show_neural_net(NeuralLayer *neural_net, int layers){
         from_matrix_show_matrix(ap -> weights);
         printf(" - Bias\n");
         from_matrix_show_matrix(ap -> bias);
-        
-        /*switch(ap -> function){
-            case NeuralLayer::Sigmoidal: printf("Sigmoidal\n");
-            break;
-
-            case NeuralLayer::Tanh: printf("Tanh\n");
-            break;
-        }*/
     }
 }
 
@@ -140,14 +132,8 @@ void feed_forward_neural_net(NeuralLayer *neural_net, int layers){
     Matrix res;
 
     for(int i = 0; i < layers - 1; i++){
-        /*printf(" DOT {output layer %i & weights layer %i}\n", i, i + 1);
-        printf(" SUMA_WC {DOT & bias layer %i}\n", i + 1);
-        printf(" ACTIVE_F {SUMA_WC}\n");
-        printf(" SEET_OUTPUT {layer %i}\n", i + 1);
-        printf("\n\n");*/
-
         layer = neural_net + i;
-        layer_p = neural_net + i + 1;
+        layer_p = neural_net + (i + 1);
 
         res = from_math_functions_dot_function(layer -> output, layer_p -> weights);
         res = from_math_functions_sum_wc_function(res, layer_p -> bias);
