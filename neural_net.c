@@ -148,6 +148,37 @@ void feed_forward_neural_net(NeuralLayer *neural_net, int layers){
     }
 }
 
+void backpropagation_neural_net(NeuralLayer *neural_net,  Matrix exp_output, int layers, float learning_rate){
+    /*
+    - Para cada capa (de adelante hacia atrás):
+        - Si es la última capa:
+            - Calcular error (output layer - exp_output)
+            - Calcular deriv function (output layer)
+            - Calcular delta layer (error * deriv)
+
+        - Si no es la última capa:
+            - Calcular transposición (weights layer + 1)
+            - Calcular deriv (output layer)
+            - Calcular dot (delta layer +1, transposición)
+            - Calcular delta layer (multiplicación normal de matrices (dot, deriv))
+
+        // Descenso del Gradiente
+
+        // Actualización de Bias
+        - Calcular mean (deltas layer)
+        - Calcular mult_float (mean * learning rate)
+        - Calcular resta (bias layer, mult_float)
+        - Actualizar Bias = resta
+
+        // Actualización de Weights
+        - Calcular transposición (output layer - 1)
+        - Calcular dot (transposición, delta layer)
+        - Calcular mult_float (dot, learning_rate)
+        - Calcular resta (weights layer, mult_float)
+        - Actualizar Weights = resta
+    */
+}
+
 void show_final_output_neural_net(NeuralLayer *neural_net, int layers){
     NeuralLayer *layer;
 
@@ -156,7 +187,7 @@ void show_final_output_neural_net(NeuralLayer *neural_net, int layers){
     from_matrix_show_matrix(layer -> output);
 }
 
-int main(){
+/*int main(){
     srand(time(NULL));
 
     int layers = 3;
@@ -176,6 +207,16 @@ int main(){
         1.0, 1.0
     );
 
+    Matrix output = create_matrix(4, *(arq_nn + 2));
+    from_matrix_fill_set_vector_matrix(
+        &input,
+        input.c * input.r,
+        0.0,
+        1.0,
+        1.0,
+        0.0
+    );
+
     NeuralLayer *neural_net = (NeuralLayer*) malloc(layers * sizeof(NeuralLayer));
     create_neural_net(neural_net, arq_nn, layers, input);
     show_neural_net(neural_net, layers);
@@ -188,4 +229,5 @@ int main(){
     free_neural_net(neural_net, &layers);
     free((void*) arq_nn);
     free((void*) neural_net);
-}
+    from_matrix_free_matrix(&output);
+}*/

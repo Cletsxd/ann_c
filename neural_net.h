@@ -7,5 +7,6 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
 void show_neural_net(NeuralLayer *neural_net, int layers);
 void free_neural_net(NeuralLayer *neural_net, int *layers);
 void feed_forward_neural_net(NeuralLayer *neural_net, int layers);
+void show_final_output_neural_net(NeuralLayer *neural_net, int layers);
 
 #endif
