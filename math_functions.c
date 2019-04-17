@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "math_functions.h"
 #include "matrix_struct.h"
@@ -318,8 +319,25 @@ Matrix mult_matrix_float_function(Matrix mat, float num){
 }
 
 Matrix sigmoidal_act_function(Matrix mat){
-    printf("act sigm\n");
     Matrix res;
+    res = from_matrix_create_matrix(mat.r, mat.c);
+    from_matrix_fill_zeros_matrix(&res);
+
+    float exp_value;
+
+    float *res_aux;
+    float *mat_aux;
+
+    for(int i = 0; i < mat.r; i++){
+        res_aux = *(res.vector + i);
+        mat_aux = *(mat.vector + i);
+
+        for(int j = 0; j < mat.c; j++){
+            exp_value = exp((double) - *(mat_aux + j));
+            *(res_aux + j) = (1 / (1 + exp_value));
+        }
+    }
+
     return res;
 }
 

@@ -61,7 +61,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
         ap -> bias = from_matrix_create_matrix(1, *(arq_nn + i));
         ap -> output = from_matrix_create_null_matrix();
         ap -> deltas = from_matrix_create_null_matrix();
-        ap -> function = NeuralLayer::Tanh;
+        ap -> function = NeuralLayer::Sigmoidal;
 
         from_matrix_fill_matrix(&ap -> weights);
         from_matrix_fill_matrix(&ap -> bias);
@@ -145,6 +145,7 @@ void feed_forward(NeuralLayer *neural_net, int layers){
         printf(" ACTIVE_F {SUMA_WC}\n");
         printf(" SEET_OUTPUT {layer %i}\n", i + 1);
         printf("\n\n");*/
+
         layer = neural_net + i;
         layer_p = neural_net + i + 1;
 
