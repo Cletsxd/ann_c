@@ -16,5 +16,6 @@ Matrix relu_act_function(Matrix mat);
 Matrix sigmoidal_deriv_function(Matrix mat);
 Matrix tanh_deriv_function(Matrix mat);
 Matrix relu_deriv_function(Matrix mat);
+Matrix t_function(Matrix mat);
 
 #endif

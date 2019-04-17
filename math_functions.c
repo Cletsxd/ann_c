@@ -318,6 +318,27 @@ Matrix mult_matrix_float_function(Matrix mat, float num){
     return res;
 }
 
+Matrix t_fuction(Matrix mat){
+    Matrix res;
+    res = from_matrix_create_matrix(mat.c, mat.r);
+    from_matrix_fill_zeros_matrix(&res);
+
+    float *res_aux;
+    float *mat_aux;
+
+    for(int i = 0; i < mat.r; i++){
+        mat_aux = *(mat.vector + i);
+
+        for(int j = 0; j < mat.c; j++){
+            res_aux = *(res.vector + j);
+
+            *(res_aux + i) = *(mat_aux + j);
+        }
+    }
+
+    return res;
+}
+
 Matrix sigmoidal_act_function(Matrix mat){
     Matrix res;
     res = from_matrix_create_matrix(mat.r, mat.c);
@@ -519,3 +540,20 @@ Matrix relu_deriv_function(Matrix mat){
     from_matrix_free_matrix(&a);
     from_matrix_free_matrix(&res);*/
 //}
+
+int main(){
+    Matrix a = create_matrix(3, 3);
+    from_matrix_fill_set_vector_matrix(
+        &a,
+        a.c * a.r,
+        3.0, 5.0, 4.0,
+        1.0, 6.0, 7.0,
+        1.0, 0.0, 1.0
+    );
+
+    Matrix res = t_fuction(a);
+    from_matrix_show_matrix(res);
+
+    from_matrix_free_matrix(&a);
+    from_matrix_free_matrix(&res);
+}
