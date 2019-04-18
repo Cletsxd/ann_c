@@ -137,12 +137,8 @@ void feed_forward_neural_net(NeuralLayer *neural_net, int layers){
         layer_p = neural_net + (i + 1);
 
         res = from_math_functions_dot_function(layer -> output, layer_p -> weights);
-        printf("\n Linear Regressor\n");
-        from_matrix_show_matrix(res);
 
         res = from_math_functions_sum_wc_function(res, layer_p -> bias);
-        printf("\n Activation Function\n");
-        from_matrix_show_matrix(res);
 
         switch(layer_p -> function){
             case NeuralLayer::Sigmoidal: res = from_math_functions_sigmoidal_act_function(res); break;
@@ -151,66 +147,84 @@ void feed_forward_neural_net(NeuralLayer *neural_net, int layers){
         }
 
         layer_p -> output = res;
-        printf("\n Output\n");
-        from_matrix_show_matrix(layer_p -> output);
     }
 }
 
 void backpropagation_neural_net(NeuralLayer *neural_net,  Matrix exp_output, int layers, float learning_rate){
-    NeuralLayer *l;
-    NeuralLayer *l_p;
-    NeuralLayer *l_l;
+    NeuralLayer *cur_layer;
+    NeuralLayer *pre_layer;
+    NeuralLayer *nex_layer;
 
     //- Para cada capa (de adelante hacia atrás):
-    for(int layer = layers - 1; layer >= 0; layer--){
-        l = neural_net + layer;
-        l_p = neural_net + (layer + 1);
-        l_l = neural_net + (layer - 1);
+    for(int layer = layers - 1; layer >= 1; layer--){
+        cur_layer = neural_net + layer;
+        pre_layer = neural_net + (layer - 1);
 
         //- Si es la última capa:
         if(layer == layers - 1){
             //- Calcular error (output layer - exp_output)
-            Matrix error = from_math_functions_deriv_e2medio_function(l -> output, exp_output);
-            printf("\n exp_output\n");
-            from_matrix_show_matrix(exp_output);
-            printf("\n Error (final output - exp_output)\n");
-            from_matrix_show_matrix(error);
+            Matrix error = from_math_functions_deriv_e2medio_function(cur_layer -> output, exp_output);
 
             //- Calcular deriv function (output layer)
             Matrix deriv;
 
-            switch(l -> function){
-                case NeuralLayer::Sigmoidal: deriv = from_math_functions_sigmoidal_deriv_function(l -> output); break;
-                case NeuralLayer::Tanh: deriv = from_math_functions_tanh_deriv_function(l -> output); break;
-                case NeuralLayer::Relu: deriv = from_math_functions_relu_deriv_function(l -> output); break;
+            switch(cur_layer -> function){
+                case NeuralLayer::Sigmoidal: deriv = from_math_functions_sigmoidal_deriv_function(cur_layer -> output); break;
+                case NeuralLayer::Tanh: deriv = from_math_functions_tanh_deriv_function(cur_layer -> output); break;
+                case NeuralLayer::Relu: deriv = from_math_functions_relu_deriv_function(cur_layer -> output); break;
             }
-            printf("\n Deriv Activation Function\n");
-            from_matrix_show_matrix(deriv);
 
             //- Calcular delta layer (error * deriv)
-            l -> deltas = from_math_functions_mult_matrix_function(error, deriv);
-            printf("\n Delta last layer\n");
-            from_matrix_show_matrix(l -> deltas);
-        }
-        //- Si no es la última capa:
-            //- Calcular transposición (weights layer + 1)
-            //- Calcular deriv (output layer)
-            //- Calcular dot (delta layer +1, transposición)
-            //- Calcular delta layer (multiplicación normal de matrices (dot, deriv))
+            cur_layer -> deltas = from_math_functions_mult_matrix_function(error, deriv);
+        }else{
+            //- Si no es la última capa:
 
+            nex_layer = neural_net + (layer + 1);
+
+            //- Calcular transposición (weights layer + 1)
+            Matrix w_t = from_math_functions_t_function(nex_layer -> weights);
+
+            //- Calcular deriv (output layer)
+            Matrix deriv;
+
+            switch(cur_layer -> function){
+                case NeuralLayer::Sigmoidal: deriv = from_math_functions_sigmoidal_deriv_function(cur_layer -> output); break;
+                case NeuralLayer::Tanh: deriv = from_math_functions_tanh_deriv_function(cur_layer -> output); break;
+                case NeuralLayer::Relu: deriv = from_math_functions_relu_deriv_function(cur_layer -> output); break;
+            }
+
+            //- Calcular dot (delta layer +1, transposición)
+            Matrix m_dot = from_math_functions_dot_function(nex_layer -> deltas, w_t);
+
+
+            //- Calcular delta layer (multiplicación normal de matrices (dot, deriv))
+            cur_layer -> deltas = from_math_functions_mult_matrix_function(m_dot, deriv);
+        }
         // Descenso del Gradiente
 
         // Actualización de Bias
         //- Calcular mean (deltas layer)
+        Matrix mean = from_math_functions_mean_matrix_function(cur_layer -> deltas);
+
         //- Calcular mult_float (mean * learning rate)
+        Matrix mult_float = from_math_functions_mult_matrix_float_function(mean, learning_rate);
+
         //- Calcular resta (bias layer, mult_float)
+        cur_layer -> bias = from_math_functions_subs_matrix_function(cur_layer -> bias, mult_float);
         //- Actualizar Bias = resta
 
         // Actualización de Weights
         //- Calcular transposición (output layer - 1)
+        Matrix o_t = from_math_functions_t_function(pre_layer -> output);
+
         //- Calcular dot (transposición, delta layer)
+        Matrix dot = from_math_functions_dot_function(o_t, cur_layer -> deltas);
+
         //- Calcular mult_float (dot, learning_rate)
+        mult_float = from_math_functions_mult_matrix_float_function(dot, learning_rate);
+
         //- Calcular resta (weights layer, mult_float)
+        cur_layer -> weights = from_math_functions_subs_matrix_function(cur_layer -> weights, mult_float);
         //- Actualizar Weights = resta
     }
 }
@@ -263,6 +277,8 @@ int main(){
     show_final_output_neural_net(neural_net, layers);
 
     backpropagation_neural_net(neural_net, output, layers, 0.01);
+
+    show_neural_net(neural_net, layers);
 
     free_neural_net(neural_net, &layers);
     free((void*) arq_nn);
