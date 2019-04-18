@@ -177,7 +177,7 @@ void backpropagation_neural_net(NeuralLayer *neural_net,  Matrix exp_output, int
             //- Calcular delta layer (error * deriv)
             cur_layer -> deltas = from_math_functions_mult_matrix_function(error, deriv);
         }else{
-            //- Si no es la última capa:
+        //- Si no es la última capa:
 
             nex_layer = neural_net + (layer + 1);
 
