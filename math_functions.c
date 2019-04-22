@@ -363,8 +363,28 @@ Matrix sigmoidal_act_function(Matrix mat){
 }
 
 Matrix tanh_act_function(Matrix mat){
-    printf("act tanh\n");
     Matrix res;
+    res = from_matrix_create_matrix(mat.r, mat.c);
+    from_matrix_fill_zeros_matrix(&res);
+
+    float *res_aux;
+    float *mat_aux;
+
+    float exp_value1;
+    float exp_value2;
+
+    for(int i = 0; i < mat.r; i++){
+        res_aux = *(res.vector + i);
+        mat_aux = *(mat.vector + i);
+
+        for(int j = 0; j < mat.c; j++){
+            exp_value1 = exp((double) *(mat_aux + j));
+            exp_value2 = exp((double) - *(mat_aux + j));
+
+            *(res_aux + j) = (exp_value1 - exp_value2) / (exp_value1 + exp_value2);
+        }
+    }
+
     return res;
 }
 
@@ -395,7 +415,23 @@ Matrix sigmoidal_deriv_function(Matrix mat){
 }
 
 Matrix tanh_deriv_function(Matrix mat){
-    printf("der\n");
+    Matrix res;
+    res = from_matrix_create_matrix(mat.r, mat.c);
+    from_matrix_fill_zeros_matrix(&res);
+
+    float *res_aux;
+    float *mat_aux;
+
+    for(int i = 0; i < mat.r; i++){
+        res_aux = *(res.vector + i);
+        mat_aux = *(mat.vector + i);
+
+        for(int j = 0; j < mat.c; j++){
+            *(res_aux + j) = 1.0 - pow(*(mat_aux + j), 2);
+        }
+    }
+
+    return res;
 }
 
 Matrix relu_deriv_function(Matrix mat){

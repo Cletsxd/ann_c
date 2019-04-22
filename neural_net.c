@@ -53,7 +53,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
     ap -> weights = from_matrix_create_null_matrix();
     ap -> bias = from_matrix_create_null_matrix();
     ap -> deltas = from_matrix_create_null_matrix();
-    ap -> function = NeuralLayer::Sigmoidal;
+    ap -> function = NeuralLayer::Tanh;
 
     for(int i = 1; i < layers; i++){
         ap = neural_net + i;
@@ -62,7 +62,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
         ap -> bias = from_matrix_create_matrix(1, *(arq_nn + i));
         ap -> output = from_matrix_create_null_matrix();
         ap -> deltas = from_matrix_create_null_matrix();
-        ap -> function = NeuralLayer::Sigmoidal;
+        ap -> function = NeuralLayer::Tanh;
 
         from_matrix_fill_matrix(&ap -> weights);
         from_matrix_fill_matrix(&ap -> bias);
@@ -237,6 +237,13 @@ void show_final_output_neural_net(NeuralLayer *neural_net, int layers){
     from_matrix_show_matrix(layer -> output);
 }
 
+void train_neural_net(NeuralLayer *neural_net, Matrix exp_output, int layers, float learning_rate, int epochs){
+    for(int i = 0; i < epochs; i++){
+        feed_forward_neural_net(neural_net, layers);
+        backpropagation_neural_net(neural_net, exp_output, layers, learning_rate);
+    }
+}
+
 int main(){
     srand(time(NULL));
 
@@ -271,14 +278,21 @@ int main(){
     create_neural_net(neural_net, arq_nn, layers, input);
     show_neural_net(neural_net, layers);
 
-    feed_forward_neural_net(neural_net, layers);
+    /*feed_forward_neural_net(neural_net, layers);
 
     printf("\n Final Output\n");
     show_final_output_neural_net(neural_net, layers);
 
-    backpropagation_neural_net(neural_net, output, layers, 0.01);
+    backpropagation_neural_net(neural_net, output, layers, 0.01);*/
+
+    train_neural_net(neural_net, output, layers, 0.15, 10000);
+
+    printf("\n Neural Net after training\n");
 
     show_neural_net(neural_net, layers);
+
+    printf("\n Final Output\n");
+    show_final_output_neural_net(neural_net, layers);
 
     free_neural_net(neural_net, &layers);
     free((void*) arq_nn);
