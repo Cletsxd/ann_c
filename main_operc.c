@@ -24,8 +24,8 @@ int main(){
     int layers = 2;
 
     int *arq_nn = (int*) malloc(layers * sizeof(int));
-    *(arq_nn + 0) = 3; // Layer 1 (input layer) = 2 neurons
-    *(arq_nn + 1) = 1; // Layer 2 (1 hidden layer) = 3 neurons
+    *(arq_nn + 0) = 3; // Layer 1 (input layer) = 3 neurons
+    *(arq_nn + 1) = 1; // Layer 2 (1 hidden layer) = 1 neurons
 
     // Las entradas:
         // Ej1 | Ej2 | Ej3 | Ej4
@@ -73,13 +73,15 @@ int main(){
         n_input.c * n_input.r,
         1.0, 0.0, 0.0
     );
+
     from_neural_net_feed_forward_wi_neural_net(neural_net, n_input, layers);
 
-    printf("\n New Output\n");
+    printf("\n New output\n");
     from_neural_net_show_final_output_neural_net(neural_net, layers);
 
     from_neural_net_free_neural_net(neural_net, &layers);
     free((void*) arq_nn);
     free((void*) neural_net);
     from_matrix_free_matrix(&output);
+    from_matrix_free_matrix(&n_input);
 }
