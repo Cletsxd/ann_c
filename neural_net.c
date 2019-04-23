@@ -53,7 +53,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
     ap -> weights = from_matrix_create_null_matrix();
     ap -> bias = from_matrix_create_null_matrix();
     ap -> deltas = from_matrix_create_null_matrix();
-    ap -> function = NeuralLayer::Tanh;
+    ap -> function = NeuralLayer::Sigmoidal;
 
     for(int i = 1; i < layers; i++){
         ap = neural_net + i;
@@ -62,7 +62,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
         ap -> bias = from_matrix_create_matrix(1, *(arq_nn + i));
         ap -> output = from_matrix_create_null_matrix();
         ap -> deltas = from_matrix_create_null_matrix();
-        ap -> function = NeuralLayer::Tanh;
+        ap -> function = NeuralLayer::Sigmoidal;
 
         from_matrix_fill_matrix(&ap -> weights);
         from_matrix_fill_matrix(&ap -> bias);
@@ -243,7 +243,7 @@ void train_neural_net(NeuralLayer *neural_net, Matrix exp_output, int layers, fl
         backpropagation_neural_net(neural_net, exp_output, layers, learning_rate);
     }
 }
-
+/*
 int main(){
     srand(time(NULL));
 
@@ -254,7 +254,7 @@ int main(){
     *(arq_nn + 1) = 3; // Layer 2 (1 hidden layer) = 3 neurons
     *(arq_nn + 2) = 1; // Layer 3 (output layer) = 1 neuron
 
-    Matrix input = create_matrix(4, *(arq_nn + 0));
+    Matrix input = from_matrix_create_matrix(4, *(arq_nn + 0));
     from_matrix_fill_set_vector_matrix(
         &input,
         input.c * input.r,
@@ -264,7 +264,7 @@ int main(){
         1.0, 1.0
     );
 
-    Matrix output = create_matrix(4, *(arq_nn + 2));
+    Matrix output = from_matrix_create_matrix(4, *(arq_nn + 2));
     from_matrix_fill_set_vector_matrix(
         &output,
         output.c * output.r,
@@ -278,12 +278,12 @@ int main(){
     create_neural_net(neural_net, arq_nn, layers, input);
     show_neural_net(neural_net, layers);
 
-    /*feed_forward_neural_net(neural_net, layers);
+    feed_forward_neural_net(neural_net, layers);
 
     printf("\n Final Output\n");
     show_final_output_neural_net(neural_net, layers);
 
-    backpropagation_neural_net(neural_net, output, layers, 0.01);*/
+    backpropagation_neural_net(neural_net, output, layers, 0.01);
 
     train_neural_net(neural_net, output, layers, 0.15, 10000);
 
@@ -299,3 +299,4 @@ int main(){
     free((void*) neural_net);
     from_matrix_free_matrix(&output);
 }
+*/
