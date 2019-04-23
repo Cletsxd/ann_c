@@ -18,6 +18,7 @@ if %option%==3 goto C
 if %option%==4 goto E
 
 :Cr
+cls
 echo Compiling...
 g++ -o prueba.exe error_code.c math_functions.c matrix.c neural_net.c main_acar.c
 cls
