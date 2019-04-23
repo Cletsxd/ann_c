@@ -16,6 +16,7 @@ static void (*from_neural_net_show_neural_net) (NeuralLayer*, int) = show_neural
 static void (*from_neural_net_free_neural_net) (NeuralLayer*, int*) = free_neural_net;
 static void (*from_neural_net_train_neural_net) (NeuralLayer*, Matrix, int, float, int) = train_neural_net;
 static void (*from_neural_net_show_final_output_neural_net) (NeuralLayer*, int) = show_final_output_neural_net;
+static void (*from_neural_net_feed_forward_wi_neural_net) (NeuralLayer*, Matrix, int) = feed_forward_wi_neural_net;
 
 int main(){
     srand(time(NULL));
@@ -63,6 +64,18 @@ int main(){
     from_neural_net_show_neural_net(neural_net, layers);
 
     printf("\n Final Output\n");
+    from_neural_net_show_final_output_neural_net(neural_net, layers);
+
+    printf("\n New Input = {1, 0, 0}\n");
+    Matrix n_input = from_matrix_create_matrix(1, *(arq_nn + 0));
+    from_matrix_fill_set_vector_matrix(
+        &n_input,
+        n_input.c * n_input.r,
+        1.0, 0.0, 0.0
+    );
+    from_neural_net_feed_forward_wi_neural_net(neural_net, n_input, layers);
+
+    printf("\n New Output\n");
     from_neural_net_show_final_output_neural_net(neural_net, layers);
 
     from_neural_net_free_neural_net(neural_net, &layers);

@@ -150,6 +150,34 @@ void feed_forward_neural_net(NeuralLayer *neural_net, int layers){
     }
 }
 
+void feed_forward_wi_neural_net(NeuralLayer *neural_net, Matrix input, int layers){
+    NeuralLayer *layer;
+    NeuralLayer *layer_p;
+
+    Matrix res;
+
+    for(int i = 0; i < layers - 1; i++){
+        layer = neural_net + i;
+        layer_p = neural_net + (i + 1);
+
+        if(i == 0){
+            res = from_math_functions_dot_function(input, layer_p -> weights);
+        }else{
+            res = from_math_functions_dot_function(layer -> output, layer_p -> weights);
+        }
+
+        res = from_math_functions_sum_wc_function(res, layer_p -> bias);
+
+        switch(layer_p -> function){
+            case NeuralLayer::Sigmoidal: res = from_math_functions_sigmoidal_act_function(res); break;
+            case NeuralLayer::Tanh: res = from_math_functions_tanh_act_function(res); break;
+            case NeuralLayer::Relu: res = from_math_functions_relu_act_function(res); break;
+        }
+
+        layer_p -> output = res;
+    }
+}
+
 void backpropagation_neural_net(NeuralLayer *neural_net,  Matrix exp_output, int layers, float learning_rate){
     NeuralLayer *cur_layer;
     NeuralLayer *pre_layer;
