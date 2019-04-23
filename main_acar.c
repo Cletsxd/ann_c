@@ -21,6 +21,8 @@ static void (*from_neural_net_feed_forward_wi_neural_net) (NeuralLayer*, Matrix,
 int main(){
     srand(time(NULL));
 
+    // UTILIZAR TENGENTE HIPERBÓLICA
+    
     int layers = 3;
 
     int *arq_nn = (int*) malloc(layers * sizeof(int));

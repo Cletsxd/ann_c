@@ -20,6 +20,8 @@ static void (*from_neural_net_show_final_output_neural_net) (NeuralLayer*, int) 
 int main(){
     srand(time(NULL));
 
+    // SE PUEDE UTILIZAR SIGMOIDAL O TANH (CON TANH ES MÁS EXACTO)
+    
     int layers = 3;
 
     int *arq_nn = (int*) malloc(layers * sizeof(int));
