@@ -53,7 +53,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
     ap -> weights = from_matrix_create_null_matrix();
     ap -> bias = from_matrix_create_null_matrix();
     ap -> deltas = from_matrix_create_null_matrix();
-    ap -> function = NeuralLayer::Sigmoidal;
+    ap -> function = NeuralLayer::Tanh;
 
     for(int i = 1; i < layers; i++){
         ap = neural_net + i;
@@ -62,7 +62,7 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
         ap -> bias = from_matrix_create_matrix(1, *(arq_nn + i));
         ap -> output = from_matrix_create_null_matrix();
         ap -> deltas = from_matrix_create_null_matrix();
-        ap -> function = NeuralLayer::Sigmoidal;
+        ap -> function = NeuralLayer::Tanh;
 
         from_matrix_fill_matrix(&ap -> weights);
         from_matrix_fill_matrix(&ap -> bias);
