@@ -11,7 +11,7 @@ static Matrix (*from_matrix_create_matrix) (int, int) = create_matrix;
 static void (*from_matrix_fill_set_vector_matrix) (Matrix*, int, ...) = fill_set_vector_matrix;
 static void (*from_matrix_free_matrix) (Matrix*) = free_matrix;
 
-static void (*from_neural_net_create_neural_net) (NeuralLayer*, int*, int, Matrix) = create_neural_net;
+static void (*from_neural_net_create_neural_net) (NeuralLayer*, int*, int, Matrix, char) = create_neural_net;
 static void (*from_neural_net_show_neural_net) (NeuralLayer*, int) = show_neural_net;
 static void (*from_neural_net_free_neural_net) (NeuralLayer*, int*) = free_neural_net;
 static void (*from_neural_net_train_neural_net) (NeuralLayer*, Matrix, int, float, int) = train_neural_net;
@@ -57,7 +57,7 @@ int main(){
     );
 
     NeuralLayer *neural_net = (NeuralLayer*) malloc(layers * sizeof(NeuralLayer));
-    from_neural_net_create_neural_net(neural_net, arq_nn, layers, input);
+    from_neural_net_create_neural_net(neural_net, arq_nn, layers, input, 't');
     from_neural_net_show_neural_net(neural_net, layers);
 
     from_neural_net_train_neural_net(neural_net, output, layers, 0.03, 15000);

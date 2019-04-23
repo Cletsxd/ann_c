@@ -38,7 +38,7 @@ static void (*from_error_code_good_bye) (void) = good_bye;
 
 struct NeuralLayer;
 
-void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix input){
+void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix input, char act_f){
     if(layers == 0){
         from_error_code_error_code(6);
         from_error_code_function_number(7);
@@ -53,8 +53,13 @@ void create_neural_net(NeuralLayer *neural_net, int *arq_nn, int layers, Matrix 
     ap -> weights = from_matrix_create_null_matrix();
     ap -> bias = from_matrix_create_null_matrix();
     ap -> deltas = from_matrix_create_null_matrix();
-    ap -> function = NeuralLayer::Tanh;
-
+    
+    switch(act_f){
+        case 's': ap -> function = NeuralLayer::Sigmoidal; break;
+        case 't': ap -> function = NeuralLayer::Tanh; break;
+        case 'r': ap -> function = NeuralLayer::Relu; break;
+    }
+    
     for(int i = 1; i < layers; i++){
         ap = neural_net + i;
 
