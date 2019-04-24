@@ -1,7 +1,7 @@
 # Redes Neuronales en el Lenguaje de Programación C
 
 Son tres archivos .c que contienen tres redes neuronales propuestas:
-  - main_acar.c: simula el aprendizaje de un coche automático
+  - main_acar.c: simula el aprendizaje dependiendo de unos sensores de un supuesto coche automático
   - main_operc.c: corre entradas en un solo perceptrón
   - main_xor.c: simula la compuerta XOR (OR Exclusivo)
   
