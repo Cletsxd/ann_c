@@ -18,3 +18,5 @@ Para Batch:
   - prueba_xor.bat
 
 Es posible que los archivos no funcionen si no se tiene el compilador g++.
+
+Se aceptan sugerencias :D
