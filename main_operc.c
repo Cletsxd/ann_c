@@ -27,7 +27,7 @@ int main(){
 
     int *arq_nn = (int*) malloc(layers * sizeof(int));
     *(arq_nn + 0) = 3; // Layer 1 (input layer) = 3 neurons
-    *(arq_nn + 1) = 1; // Layer 2 (1 hidden layer) = 1 neurons
+    *(arq_nn + 1) = 1; // Layer 2 (output layer) = 1 neurons
 
     // Las entradas:
         // Ej1 | Ej2 | Ej3 | Ej4
