@@ -28,7 +28,7 @@ int main(){
     int *arq_nn = (int*) malloc(layers * sizeof(int));
     *(arq_nn + 0) = 2; // Layer 1 (input layer) = 2 neurons
     *(arq_nn + 1) = 3; // Layer 2 (1 hidden layer) = 3 neurons
-    *(arq_nn + 2) = 2; // Layer 3 (1 hidden layer) = 2 neurons
+    *(arq_nn + 2) = 2; // Layer 3 (output layer) = 2 neurons
 
     Matrix input = from_matrix_create_matrix(7, *(arq_nn + 0));
     from_matrix_fill_set_vector_matrix(
