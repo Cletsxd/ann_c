@@ -205,7 +205,7 @@ Matrix deriv_e2medio_function(Matrix a, Matrix b){
         exit(-1);
     }
 
-    return subs_matrix_function(a, b);
+    return mult_matrix_float_function(subs_matrix_function(a, b), 2.0);
 }
 
 Matrix mult_matrix_function(Matrix a, Matrix b){
