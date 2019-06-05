@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "math_functions.h"
-#include "matrix_struct.h"
-#include "matrix.h"
-#include "error_code.h"
+#include "../h/math_functions.h"
+#include "../h/matrix_struct.h"
+#include "../h/matrix.h"
+#include "../h/error_code.h"
 
 static Matrix (*from_matrix_create_matrix) (int, int) = create_matrix;
 static void (*from_matrix_show_matrix) (Matrix) = show_matrix;
