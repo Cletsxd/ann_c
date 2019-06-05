@@ -17,7 +17,7 @@ while [ $option -ne 4 ]; do
     if [ $option -eq 1 ]; then
         clear
         echo "Compiling..."
-        g++ -o prueba.exe error_code.c math_functions.c matrix.c neural_net.c main_acar.c
+        g++ -o prueba.exe c/error_code.c c/math_functions.c c/matrix.c c/neural_net.c automatic_car.c
         echo "Running..."
         ./prueba.exe
         read -p "Presione una tecla para continuar . . ."
@@ -33,7 +33,7 @@ while [ $option -ne 4 ]; do
     if [ $option -eq 3 ]; then
         clear
         echo "Compiling..."
-        g++ -o prueba.exe error_code.c math_functions.c matrix.c neural_net.c main_acar.c
+        g++ -o prueba.exe c/error_code.c c/math_functions.c c/matrix.c c/neural_net.c automatic_car.c
         read -p "Presione una tecla para continuar . . ."
     fi
 

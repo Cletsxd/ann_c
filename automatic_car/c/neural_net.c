@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "matrix_struct.h"
-#include "matrix.h"
-#include "neural_layer_struct.h"
-#include "error_code.h"
-#include "neural_net.h"
-#include "math_functions.h"
+#include "../h/matrix_struct.h"
+#include "../h/matrix.h"
+#include "../h/neural_layer_struct.h"
+#include "../h/error_code.h"
+#include "../h/neural_net.h"
+#include "../h/math_functions.h"
 
 static Matrix (*from_matrix_create_matrix) (int, int) = create_matrix;
 static Matrix (*from_matrix_create_null_matrix) (void) = create_null_matrix;

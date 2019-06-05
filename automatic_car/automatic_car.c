@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "matrix.h"
-#include "neural_net.h"
-#include "matrix_struct.h"
-#include "neural_layer_struct.h"
+#include "h/matrix.h"
+#include "h/neural_net.h"
+#include "h/matrix_struct.h"
+#include "h/neural_layer_struct.h"
 
 static Matrix (*from_matrix_create_matrix) (int, int) = create_matrix;
 static void (*from_matrix_fill_set_vector_matrix) (Matrix*, int, ...) = fill_set_vector_matrix;

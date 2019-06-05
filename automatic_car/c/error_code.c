@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "error_code.h"
+#include "../h/error_code.h"
 
 void error_code(int e){
     switch(e){
