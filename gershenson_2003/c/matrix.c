@@ -3,9 +3,9 @@
 #include <time.h>
 #include <stdarg.h>
 
-#include "matrix_struct.h"
-#include "matrix.h"
-#include "error_code.h"
+#include "../h/matrix_struct.h"
+#include "../h/matrix.h"
+#include "../h/error_code.h"
 
 static void (*from_error_code_error_code) (int) = error_code;
 static void (*from_error_code_function_number) (int) = function_number;

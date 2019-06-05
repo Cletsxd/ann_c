@@ -1,6 +1,6 @@
 @echo off
 title NeuralNet Gershenson_2003
-echo You will enter to the program Neural Net Automatic Car
+echo You will enter to the program Neural Net Gershenson_2003
 pause
 
 :Main
@@ -20,7 +20,7 @@ if %option%==4 goto E
 :Cr
 cls
 echo Compiling...
-g++ -o prueba.exe error_code.c math_functions.c matrix.c neural_net.c main_ej.c
+g++ -o prueba.exe c/error_code.c c/math_functions.c c/matrix.c c/neural_net.c gershenson_2003.c
 cls
 echo Running...
 prueba.exe
@@ -37,7 +37,7 @@ goto Main
 :C
 cls
 echo Compiling...
-g++ -o prueba.exe error_code.c math_functions.c matrix.c neural_net.c main_ej.c
+g++ -o prueba.exe c/error_code.c c/math_functions.c c/matrix.c c/neural_net.c gershenson_2003.c
 pause
 goto Main
 
