@@ -20,7 +20,7 @@ if %option%==4 goto E
 :Cr
 cls
 echo Compiling...
-g++ -o prueba.exe error_code.c math_functions.c matrix.c neural_net.c main_xor.c
+g++ -o prueba.exe c/error_code.c c/math_functions.c c/matrix.c c/neural_net.c xor_problem.c
 cls
 echo Running...
 prueba.exe
@@ -37,7 +37,7 @@ goto Main
 :C
 cls
 echo Compiling...
-g++ -o prueba.exe error_code.c math_functions.c matrix.c neural_net.c main_xor.c
+g++ -o prueba.exe c/error_code.c c/math_functions.c c/matrix.c c/neural_net.c xor_problem.c
 pause
 goto Main
 
