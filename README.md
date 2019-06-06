@@ -14,3 +14,7 @@ Cada una de las carpetas anteriores contiene tres archivos:
 A su vez, cada carpeta anterior, contiene dos carpetas:
 - Carpeta "h": para los arhivos de cabecera (.h).
 - Carpeta "c": para los archivos de código de C (.c).
+
+Se recomienda el compilador __g++__.
+
+Acepto sugerencias :D
