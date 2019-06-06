@@ -10,6 +10,7 @@
 static Matrix (*from_matrix_create_matrix) (int, int) = create_matrix;
 static void (*from_matrix_fill_set_vector_matrix) (Matrix*, int, ...) = fill_set_vector_matrix;
 static void (*from_matrix_free_matrix) (Matrix*) = free_matrix;
+static void (*from_matrix_show_matrix) (Matrix) = show_matrix;
 
 static void (*from_neural_net_create_neural_net) (NeuralLayer*, int*, int, Matrix, char) = create_neural_net;
 static void (*from_neural_net_show_neural_net) (NeuralLayer*, int) = show_neural_net;
@@ -62,6 +63,9 @@ int main(){
     from_neural_net_feed_forward_neural_net(neural_net, layers);
     printf("\n Final Output\n");
     from_neural_net_show_final_output_neural_net(neural_net, layers);
+
+    printf("\n Expected Output\n");
+    from_matrix_show_matrix(output);
 
     from_neural_net_free_neural_net(neural_net, &layers);
     free((void*) arq_nn);
