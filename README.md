@@ -1,22 +1,7 @@
 # Redes Neuronales en el Lenguaje de Programación C
 
-Son tres archivos .c que contienen tres redes neuronales propuestas:
-  - main_acar.c: simula el aprendizaje, dependiendo de unos sensores, de un supuesto coche automático
-  - main_operc.c: corre entradas en un solo perceptrón
-  - main_xor.c: simula la compuerta XOR (OR Exclusivo)
-  
-Archivos .bat y .sh pueden servir para compilar y correr las redes neuronales propuestas.
-
-Para Bash:
-  - prueba_acar.sh
-  - prueba_operc.sh
-  - prueba_xor.sh
-  
-Para Batch:
-  - prueba_acar.bat
-  - prueba_operc.bat
-  - prueba_xor.bat
-
-Es posible que los archivos no funcionen si no se tiene el compilador g++.
-
-Se aceptan sugerencias :D
+Son tres carpetas, una para cada implementación de las redes neuronales propuestas:
+- Carpeta "automatic_car": para correr la simulación de aprendizaje de un supuesto coche automático que depende de varios sensores.
+- Carpeta "gershenson_2003": ésta corre el problema propuesto por Gershenson en su artículo Artificial Neural Networks for Beginners.
+- Carpeta "perceptron": corre un perceptron.
+- Carpeta "xor_problem": el problema del OR Exclusivo se corre dentro de esta carpeta.
