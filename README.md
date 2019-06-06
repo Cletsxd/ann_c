@@ -5,3 +5,12 @@ Son tres carpetas, una para cada implementación de las redes neuronales propues
 - Carpeta "gershenson_2003": ésta corre el problema propuesto por Gershenson en su artículo _Artificial Neural Networks for Beginners_.
 - Carpeta "perceptron": corre un Perceptron.
 - Carpeta "xor_problem": el problema del OR Exclusivo se corre dentro de esta carpeta.
+
+Cada una de las carpetas anteriores contiene tres archivos:
+- Archivo BAT (.bat): para ejecutar la implementación deseada en Windows.
+- Archvio SH (.sh): para ejecutar la implementación deseada en Linux.
+- Archivo C (.c): código fuente del programa principal de la implementación deseada.
+
+A su vez, cada carpeta anterior, contiene dos carpetas:
+- Carpeta "h": para los arhivos de cabecera (.h).
+- Carpeta "c": para los archivos de código de C (.c).
