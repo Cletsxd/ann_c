@@ -63,7 +63,10 @@ int main(){
 
     from_neural_net_train_neural_net(neural_net, output, layers, 0.15, 10000);
 
-    printf("\n Neural Net after training\n");
+    printf("\n Neural Net after training:");
+    printf("\n - Learning rate = 0.15");
+    printf("\n - Epochs = 10000");
+    printf("\n - Function: Hyperbolic Tangent (tanh)\n");
 
     from_neural_net_show_neural_net(neural_net, layers);
 
