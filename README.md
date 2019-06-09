@@ -15,6 +15,8 @@ A su vez, cada carpeta anterior, contiene dos carpetas:
 - Carpeta "h": para los arhivos de cabecera (.h).
 - Carpeta "c": para los archivos de código de C (.c).
 
+Dentro de la carpeta "xor_problem" existe un archivo de texto plano con la salida del programa llamado "salida.txt". Este formato de "salida" se mantiene en todos las demás implementaciones.
+
 Se recomienda el compilador __g++__.
 
 Acepto sugerencias :D
